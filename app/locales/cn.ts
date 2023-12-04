@@ -358,7 +358,7 @@ const cn = {
   },
   Store: {
     DefaultTopic: "新的聊天",
-    BotHello: "有什么可以帮你的吗",
+    BotHello: "主站点：https://8.130.132.80\n不忘初心，方得始终！\n感谢开源，致敬Yidadaa大佬！",
     Error: "出错了，稍后重试吧",
     Prompt: {
       History: (content: string) => "这是历史聊天总结作为前情提要：" + content,
