@@ -29,10 +29,10 @@ jobs:
     #     contents: read
     steps:
       - # This CI / CD Docker Builder with multi-repo
-        name: Check out Chatgpt-Next-Web-Chain repo
+        name: Check out chatgpt-next-web-chain repo
         uses: actions/checkout@v3
         with:
-          repository: ${{ github.repository_owner }}/Chatgpt-Next-Web-Chain
+          repository: ${{ github.repository_owner }}/chatgpt-next-web-chain
           ref: main
 
       -
@@ -48,7 +48,7 @@ jobs:
           name: Copy go sum
           if: ${{ github.event.inputs.build_reverse_proxy == 'yes' }}
           run: |
-              cp ${{ runner.workspace }}/Chatgpt-Next-Web-Chain/go-reverse-proxy/go.sum ${{ runner.workspace }}/Chatgpt-Next-Web-Chain
+              cp ${{ runner.workspace }}/chatgpt-next-web-chain/go-reverse-proxy/go.sum ${{ runner.workspace }}/chatgpt-next-web-chain
       -
         name: Set up Go
         if: ${{ github.event.inputs.build_reverse_proxy == 'yes' }}
