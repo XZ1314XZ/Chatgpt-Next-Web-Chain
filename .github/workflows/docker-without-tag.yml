@@ -29,10 +29,10 @@ jobs:
     #     contents: read
     steps:
       - # This CI / CD Docker Builder with multi-repo
-        name: Check out ChatGPT-Next-Web repo
+        name: Check out Chatgpt-Next-Web-Chain repo
         uses: actions/checkout@v3
         with:
-          repository: ${{ github.repository_owner }}/ChatGPT-Next-Web
+          repository: ${{ github.repository_owner }}/Chatgpt-Next-Web-Chain
           ref: main
 
       -
@@ -42,13 +42,13 @@ jobs:
         with:
           repository: ${{ github.repository_owner }}/go-reverse-proxy
           ref: master
-          path: ${{ runner.workspace }}/ChatGPT-Next-Web/go-reverse-proxy
+          path: ${{ runner.workspace }}/Chatgpt-Next-Web-Chain/go-reverse-proxy
 
       -
           name: Copy go sum
           if: ${{ github.event.inputs.build_reverse_proxy == 'yes' }}
           run: |
-              cp ${{ runner.workspace }}/ChatGPT-Next-Web/go-reverse-proxy/go.sum ${{ runner.workspace }}/ChatGPT-Next-Web
+              cp ${{ runner.workspace }}/Chatgpt-Next-Web-Chain/go-reverse-proxy/go.sum ${{ runner.workspace }}/Chatgpt-Next-Web-Chain
       -
         name: Set up Go
         if: ${{ github.event.inputs.build_reverse_proxy == 'yes' }}
@@ -57,7 +57,7 @@ jobs:
           go-version: '1.21.3'
         env:
           NODE_VERSION: 18
-          working-directory: ${{ runner.workspace }}/ChatGPT-Next-Web/go-reverse-proxy
+          working-directory: ${{ runner.workspace }}/Chatgpt-Next-Web-Chain/go-reverse-proxy
 
 
       -
@@ -73,7 +73,7 @@ jobs:
           id: meta
           uses: docker/metadata-action@v4
           with:
-            images: xz1314xz/chatgpt-next-web-chain
+            images: xz1314xz/Chatgpt-Next-Web-Chain
             tags: |
              type=raw,value=latest
              type=raw,value=${{ github.event.inputs.tag_version }}
@@ -92,10 +92,10 @@ jobs:
         if: ${{ github.event.inputs.build_reverse_proxy == 'yes' }}
         uses: docker/build-push-action@v4
         with:
-          context: ${{ runner.workspace }}/ChatGPT-Next-Web/go-reverse-proxy
+          context: ${{ runner.workspace }}/Chatgpt-Next-Web-Chain/go-reverse-proxy
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ghcr.io/xz1314xz/chatgpt-next-web-chain:${{ github.event.inputs.go_reverse_proxy_tag }}
+          tags: ghcr.io/xz1314xz/Chatgpt-Next-Web-Chain-chain:${{ github.event.inputs.go_reverse_proxy_tag }}
           labels: |
             ${{ steps.meta.outputs.labels }}
             org.opencontainers.image.description="${{ github.event.inputs.description }}"
@@ -110,7 +110,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: | 
-            ghcr.io/xz1314xz/chatgpt-next-web-chain:${{ github.event.inputs.tag_version }}
+            ghcr.io/xz1314xz/Chatgpt-next-web-chain:${{ github.event.inputs.tag_version }}
           labels: |
             ${{ steps.meta.outputs.labels }}
             org.opencontainers.image.description="${{ github.event.inputs.description }}"
